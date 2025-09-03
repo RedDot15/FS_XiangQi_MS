@@ -1,0 +1,13 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /online-user
+
+spring:
+  application:
+    name: online-user-service
+
+app:
+  services:
+    profile: http://localhost:8087/profile
+

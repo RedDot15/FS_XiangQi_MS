@@ -1,38 +1,19 @@
 server:
-  port: 8080
+  port: 8084
+  servlet:
+    context-path: /match-contract
 
 spring:
   application:
-    name: Xiangqi
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
+    name: match-contract-service
   config:
     import: env.properties
   data:
     redis:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
-  security:
-    oauth2:
-      client:
-        google:
-          client-id: ${GOOGLE_CLIENT_ID}
-          client-secret: ${GOOGLE_CLIENT_SECRET}
-          token:
-            base-url: https://oauth2.googleapis.com
-            path: /token
-          userinfo:
-            base-url: https://www.googleapis.com
-            path: /oauth2/v1/userinfo
 
-jwt:
-  signer-key: ${SIGNER_KEY}
-  valid-duration: 3600 # in second
-  refreshable-duration: 36000 # in seconds
+app:
+  services:
+    match: http://localhost:8085/match
 

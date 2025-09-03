@@ -5,10 +5,21 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/BE/authentication-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/chat-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/identity-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/invitation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/match-contract-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/match-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/online-player-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/profile-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/queue-service/pom.xml" />
+        <option value="$PROJECT_DIR$/BE/online-user-service/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="corretto-21" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

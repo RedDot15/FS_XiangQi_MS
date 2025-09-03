@@ -1,0 +1,43 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /identity
+
+spring:
+  application:
+    name: identity-service
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  config:
+    import: env.properties
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+  security:
+    oauth2:
+      client:
+        google:
+          client-id: ${GOOGLE_CLIENT_ID}
+          client-secret: ${GOOGLE_CLIENT_SECRET}
+          token:
+            base-url: https://oauth2.googleapis.com
+            path: /token
+          userinfo:
+            base-url: https://www.googleapis.com
+            path: /oauth2/v1/userinfo
+
+jwt:
+  signer-key: ${SIGNER_KEY}
+  valid-duration: 3600 # in second
+  refreshable-duration: 36000 # in seconds
+
+app:
+  services:
+    profile: http://localhost:8082/profile
