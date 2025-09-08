@@ -1,0 +1,14 @@
+server:
+  port: 8089
+  servlet:
+    context-path: /history
+
+spring:
+  application:
+    name: history-service
+
+app:
+  services:
+    match: http://localhost:8085/match
+    profile: http://localhost:8087/profile
+

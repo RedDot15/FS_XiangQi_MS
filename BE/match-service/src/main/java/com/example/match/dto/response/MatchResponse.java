@@ -15,9 +15,9 @@ import java.time.Instant;
 public class MatchResponse {
     Long id;
 
-    PlayerResponse redPlayerResponse;
+    ProfileResponse redUserResponse;
 
-    PlayerResponse blackPlayerResponse;
+    ProfileResponse blackUserResponse;
 
     String result;
 

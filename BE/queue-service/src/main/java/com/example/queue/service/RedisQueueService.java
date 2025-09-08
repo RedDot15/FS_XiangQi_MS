@@ -1,4 +1,4 @@
-package com.example.queue.service.my_sql;
+package com.example.queue.service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

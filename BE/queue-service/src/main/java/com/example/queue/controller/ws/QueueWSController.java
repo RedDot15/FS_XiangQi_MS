@@ -2,7 +2,7 @@ package com.example.queue.controller.ws;
 
 import com.example.queue.dto.request.QueueJoinRequest;
 import com.example.queue.dto.request.QueueLeaveRequest;
-import com.example.queue.service.my_sql.QueueService;
+import com.example.queue.service.QueueService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

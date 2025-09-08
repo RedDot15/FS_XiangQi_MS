@@ -37,7 +37,7 @@ spring:
         - id: match-service
           uri: http://localhost:8085
           predicates:
-            - Path=${app.api-prefix}/match/**
+            - Path=${app.api-prefix}/match/matches**
           filters:
             - StripPrefix=2
         - id: online-user-service
@@ -56,5 +56,11 @@ spring:
           uri: http://localhost:8088
           predicates:
             - Path=${app.api-prefix}/queue/**
+          filters:
+            - StripPrefix=2
+        - id: history-service
+          uri: http://localhost:8089
+          predicates:
+            - Path=${app.api-prefix}/history/**
           filters:
             - StripPrefix=2

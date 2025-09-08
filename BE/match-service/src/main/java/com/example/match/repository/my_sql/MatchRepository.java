@@ -12,6 +12,6 @@ import java.util.UUID;
 
 @Repository
 public interface MatchRepository extends JpaRepository<MatchEntity, UUID> {
-    @Query("SELECT m FROM MatchEntity m WHERE (:userId IS NULL OR m.blackUserId.id = :userId OR m.redUserId.id = :userId) AND m.result NOT IN ('PLAYING...', 'Match cancel.')")
-    Page<MatchEntity> findAllFinished(Pageable pageable, @Param("userId") Long userId);
+    @Query("SELECT m FROM MatchEntity m WHERE (:userId IS NULL OR m.blackUserId = :userId OR m.redUserId = :userId) AND m.result NOT IN ('PLAYING...', 'Match cancel.')")
+    Page<MatchEntity> findAllFinished(Pageable pageable, @Param("userId") String userId);
 }

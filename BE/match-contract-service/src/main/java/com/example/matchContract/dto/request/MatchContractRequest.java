@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MatchContractRequest {
-    ContractUserRequest player1;
+    ContractUserRequest user1;
 
-    ContractUserRequest player2;
+    ContractUserRequest user2;
 }

@@ -1,4 +1,4 @@
-package com.example.match.service.my_sql;
+package com.example.match.service;
 
 import com.example.match.dto.request.MatchRequest;
 import com.example.match.dto.request.MoveRequest;
@@ -46,7 +46,7 @@ public class MatchService {
 	private static final long USER_TOTAL_TIME_EXPIRATION = 60_000 * 15;
 	private final MatchStateMapper matchStateMapper;
 
-	public PageResponse<MatchResponse> getAllFinished(int page, int size, Long userId) {
+	public PageResponse<MatchResponse> getAllFinished(int page, int size, String userId) {
 		// Define pageable
 		Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "startTime"));
 		// Find all finished match

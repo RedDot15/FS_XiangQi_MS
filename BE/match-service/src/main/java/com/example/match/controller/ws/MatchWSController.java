@@ -2,7 +2,7 @@ package com.example.match.controller.ws;
 
 import com.example.match.dto.request.MoveRequest;
 import com.example.match.dto.request.ResignRequest;
-import com.example.match.service.my_sql.MatchService;
+import com.example.match.service.MatchService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

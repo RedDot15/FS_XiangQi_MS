@@ -9,7 +9,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MatchMapper {
 	// Response
-	@Mapping(target = "redPlayerResponse", source = "redPlayerEntity")
-	@Mapping(target = "blackPlayerResponse", source = "blackPlayerEntity")
+	@Mapping(target = "redUserResponse", source = "redPlayerEntity")
+	@Mapping(target = "blackUserResponse", source = "blackPlayerEntity")
 	MatchResponse toResponse(MatchEntity matchEntity);
 }

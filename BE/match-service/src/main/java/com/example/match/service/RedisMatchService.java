@@ -1,4 +1,4 @@
-package com.example.match.service.my_sql;
+package com.example.match.service;
 
 import com.example.match.entity.redis.MatchStateEntity;
 import jakarta.transaction.Transactional;

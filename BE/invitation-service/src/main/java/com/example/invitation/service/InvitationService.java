@@ -9,7 +9,6 @@ import com.example.invitation.helper.MessageObject;
 import com.example.invitation.model.PlayerStatus;
 import com.example.invitation.repository.http_client.MatchClient;
 import com.example.invitation.repository.http_client.OnlineUserClient;
-import jakarta.transaction.Transactional;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-@Transactional
 @Service
 public class InvitationService {
     // Maps to store invitations

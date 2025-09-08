@@ -15,9 +15,9 @@ import java.time.Instant;
 public class MatchStateResponse {
     String[][] boardState;
 
-    MatchStatePlayerResponse redPlayer;
+    MatchStateUserResponse redUser;
 
-    MatchStatePlayerResponse blackPlayer;
+    MatchStateUserResponse blackUser;
 
     Long turn;
 

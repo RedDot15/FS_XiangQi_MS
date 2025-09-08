@@ -1,4 +1,4 @@
-package com.example.queue.service.my_sql;
+package com.example.queue.service;
 
 import com.example.queue.dto.request.ContractPlayerRequest;
 import com.example.queue.dto.request.MatchContractRequest;

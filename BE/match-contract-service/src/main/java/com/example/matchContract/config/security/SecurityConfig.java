@@ -38,10 +38,6 @@ public class SecurityConfig {
 		"/ws/**"
 	};
 
-	@NonFinal
-	@Value("${jwt.signer-key}")
-	String SIGNER_KEY;
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CustomJwtDecoder customJwtDecoder)
 			throws Exception {

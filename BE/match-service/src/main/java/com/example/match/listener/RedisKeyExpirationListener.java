@@ -1,6 +1,6 @@
 package com.example.match.listener;
 
-import com.example.match.service.my_sql.MatchService;
+import com.example.match.service.MatchService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
