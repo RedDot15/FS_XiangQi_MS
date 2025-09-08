@@ -38,10 +38,6 @@ public class SecurityConfig {
 		"/ws/**"
 	};
 
-	@NonFinal
-	@Value("${jwt.signer-key}")
-	String SIGNER_KEY;
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CustomJwtDecoder customJwtDecoder)
 			throws Exception {
@@ -50,7 +46,6 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(
 						authorize -> authorize
-								.requestMatchers(HttpMethod.POST, "/api/players").permitAll()
 								.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
 								.anyRequest()
 								.authenticated() // Authenticate the rest endpoint
@@ -78,29 +73,6 @@ public class SecurityConfig {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
 		return source;
-	}
-
-	@Bean
-	NimbusJwtDecoder nimbusJwtDecoder() {
-		SecretKeySpec secretKeySpec = new SecretKeySpec(SIGNER_KEY.getBytes(), "HS512");
-		NimbusJwtDecoder decoder = NimbusJwtDecoder.withSecretKey(secretKeySpec)
-				.macAlgorithm(MacAlgorithm.HS512)
-				.build();
-
-		// Define JwtTimestampValidator with clock skew = 0
-		JwtTimestampValidator timestampValidator = new JwtTimestampValidator(Duration.ofSeconds(0));
-
-		// Set validator
-		decoder.setJwtValidator(timestampValidator);
-
-		// Return
-		return decoder;
-	}
-
-	// Providing password encode method
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 	@Bean

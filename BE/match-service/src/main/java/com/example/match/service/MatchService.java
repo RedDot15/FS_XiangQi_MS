@@ -4,7 +4,7 @@ import com.example.match.dto.request.MatchRequest;
 import com.example.match.dto.request.MoveRequest;
 import com.example.match.dto.request.ResignRequest;
 import com.example.match.dto.response.*;
-import com.example.match.entity.my_sql.MatchEntity;
+import com.example.match.entity.mongo.MatchEntity;
 import com.example.match.entity.redis.MatchStateEntity;
 import com.example.match.entity.redis.MatchStateUserEntity;
 import com.example.match.exception.AppException;
@@ -13,10 +13,9 @@ import com.example.match.helper.MessageObject;
 import com.example.match.mapper.MatchMapper;
 import com.example.match.mapper.MatchStateMapper;
 import com.example.match.repository.http_client.ProfileClient;
-import com.example.match.repository.my_sql.MatchRepository;
+import com.example.match.repository.mongo.MatchRepository;
 import com.example.match.util.BoardUtils;
 import com.example.match.util.MoveValidator;
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -32,7 +31,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Transactional
 @Service
 public class MatchService {
 	MatchRepository matchRepository;
@@ -40,11 +38,12 @@ public class MatchService {
 	RedisMatchService redisMatchService;
 	MatchMapper matchMapper;
     ProfileClient profileClient;
+	MatchStateMapper matchStateMapper;
 
+	private static final String INITIAL_MATCH_RESULT = "PLAYING...";
 	private static final long USER_TOTAL_TIME_LEFT = 60_000 * 15;
 	private static final long USER_TURN_TIME_EXPIRATION = 60_000 * 1;
 	private static final long USER_TOTAL_TIME_EXPIRATION = 60_000 * 15;
-	private final MatchStateMapper matchStateMapper;
 
 	public PageResponse<MatchResponse> getAllFinished(int page, int size, String userId) {
 		// Define pageable
@@ -53,7 +52,18 @@ public class MatchService {
 		Page<MatchEntity> matchEntityPage = matchRepository.findAllFinished(pageable, userId);
 		// Mapping to match response list
 		List<MatchResponse> matchResponseList = matchEntityPage.getContent()
-				.stream().map(matchMapper::toResponse)
+				.stream()
+				.map(matchEntity -> {
+					// First, map the entity to a response DTO
+					MatchResponse response = matchMapper.toResponse(matchEntity);
+
+					// Then, set the user responses using the client
+					response.setRedUserResponse((ProfileResponse) profileClient.getById(matchEntity.getRedUserId()).getData());
+					response.setBlackUserResponse((ProfileResponse) profileClient.getById(matchEntity.getBlackUserId()).getData());
+
+					// Finally, return the updated response DTO
+					return response;
+				})
 				.collect(Collectors.toList());
 
 		return new PageResponse<>(matchResponseList, matchEntityPage.getPageable(), matchEntityPage.getTotalElements());
@@ -70,6 +80,8 @@ public class MatchService {
 		boolean firstIsRed = Math.random() < 0.5;
 		matchEntity.setRedUserId(firstIsRed ? request.getUser1Id() : request.getUser2Id());
 		matchEntity.setBlackUserId(firstIsRed ? request.getUser2Id(): request.getUser1Id());
+		matchEntity.setStartTime(Instant.now());
+		matchEntity.setResult(INITIAL_MATCH_RESULT);
 
 		// Save match
 		matchRepository.save(matchEntity);

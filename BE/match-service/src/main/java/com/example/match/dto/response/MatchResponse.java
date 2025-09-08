@@ -13,7 +13,7 @@ import java.time.Instant;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MatchResponse {
-    Long id;
+    String id;
 
     ProfileResponse redUserResponse;
 

@@ -1,7 +1,6 @@
 package com.example.match.service;
 
 import com.example.match.entity.redis.MatchStateEntity;
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-@Transactional
 @Service
 public class RedisMatchService {
     RedisTemplate<String, MatchStateEntity> msRedisTemplate;
